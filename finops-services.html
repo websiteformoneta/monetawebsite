@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="medium">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud FinOps Services — Moneta</title>
+  <meta name="description" content="moneta enables AWS and Azure resellers to deliver Cloud FinOps as an ongoing managed service, helping customers understand cost drivers, identify savings opportunities, and improve cost efficiency." />
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/theme-medium.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       Navigation bar — links to all four main pages
+       ============================================================ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+
+      <a href="index.html" class="nav__logo" aria-label="Moneta home">
+        <span class="nav__logo-icon" aria-hidden="true"></span>
+        <span class="nav__logo-wordmark">moneta</span>
+      </a>
+
+      <ul class="nav__links" role="list">
+        <li><a href="platform.html"        class="nav__link">Platform</a></li>
+        <li><a href="finops-services.html" class="nav__link">FinOps Services</a></li>
+        <li><a href="why-moneta.html"      class="nav__link">Why Moneta</a></li>
+        <li><a href="#contact"             class="nav__cta">Book a Demo</a></li>
+      </ul>
+
+      <button
+        class="nav__hamburger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="nav__mobile-menu" id="mobile-menu" role="menu">
+      <a href="index.html"           class="nav__mobile-link">Home</a>
+      <a href="platform.html"        class="nav__mobile-link">Platform</a>
+      <a href="finops-services.html" class="nav__mobile-link">FinOps Services</a>
+      <a href="why-moneta.html"      class="nav__mobile-link">Why Moneta</a>
+      <a href="#contact"             class="nav__mobile-cta">Book a Demo</a>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       Hero Section — FinOps Services page
+       ============================================================ -->
+  <section class="hero hero--finops">
+    <div class="container">
+      <div class="hero__content">
+
+        <h1 class="animate-fade-up">
+          Deliver Cloud FinOps<br />
+          as a <span class="text-orange">Managed Service</span>
+        </h1>
+
+        <div class="hero__platform-line animate-fade-up delay-1">
+          <span class="hero__platform-dot"></span>
+          Turn Cloud FinOps into a scalable, revenue-generating service
+        </div>
+
+        <p class="hero__sub animate-fade-up delay-2">
+          moneta enables AWS and Azure resellers to deliver Cloud FinOps as an ongoing managed
+          service, helping customers understand cost drivers, identify savings opportunities,
+          and improve cost efficiency.
+        </p>
+
+        <div class="hero__cta-group animate-fade-up delay-3">
+          <a href="#contact" class="btn btn--primary">
+            👉 Review Your Billing, Pricing, and Margins
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Section: The Shift — Cloud Resellers Are Expected to Do More
+       ============================================================ -->
+  <section class="section section--elevated" id="shift">
+    <div class="container">
+
+      <div class="content-split">
+
+        <div class="content-split__text reveal">
+          <span class="section-label">The Shift</span>
+          <h2 style="margin-top: 16px;">Cloud Resellers Are Expected to Do More</h2>
+          <p>
+            Cloud customers expect more than infrastructure. They expect guidance on how to
+            manage cloud costs and improve cost efficiency.
+          </p>
+          <p>
+            For resellers, this creates both a challenge and an opportunity. Delivering Cloud
+            FinOps requires consistent access to accurate billing data, clear cost visibility,
+            and the ability to identify and implement savings opportunities across customer
+            environments.
+          </p>
+        </div>
+
+        <div class="content-split__visual reveal">
+          <div class="content-panel">
+            <!-- Visual: The expectation gap -->
+            <div style="text-align: center; margin-bottom: 20px;">
+              <div style="font-family: 'Outfit', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;">What Customers Now Expect</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="padding: 12px 16px; background: rgba(59,148,208,0.07); border: 1px solid rgba(59,148,208,0.18); border-radius: 8px; font-size: 0.875rem; color: var(--text-secondary);">
+                ☁️ &nbsp;Cloud infrastructure delivery
+              </div>
+              <div style="padding: 12px 16px; background: rgba(59,148,208,0.07); border: 1px solid rgba(59,148,208,0.18); border-radius: 8px; font-size: 0.875rem; color: var(--text-secondary);">
+                📊 &nbsp;Cloud cost visibility and reporting
+              </div>
+              <div style="padding: 12px 16px; background: rgba(59,148,208,0.07); border: 1px solid rgba(59,148,208,0.18); border-radius: 8px; font-size: 0.875rem; color: var(--text-secondary);">
+                💰 &nbsp;Savings identification and optimization
+              </div>
+              <div style="padding: 12px 16px; background: rgba(59,148,208,0.07); border: 1px solid rgba(59,148,208,0.18); border-radius: 8px; font-size: 0.875rem; color: var(--text-secondary);">
+                📈 &nbsp;Ongoing FinOps guidance as a managed service
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Section: The Problem — FinOps Tools Are Not Built for Resellers
+       ============================================================ -->
+  <section class="section" id="problem">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-label section-label--orange">The Problem</span>
+        <h2>FinOps Tools Are Not Built for Resellers</h2>
+        <p>
+          Traditional Cloud FinOps tools are designed for companies managing their own cloud
+          spend. They do not support resellers managing multiple customers, pricing models,
+          and billing relationships.
+        </p>
+        <p style="margin-top: 16px;">
+          They do not handle customer invoicing, reseller pricing, or margin management,
+          leaving critical parts of reseller operations unsupported.
+        </p>
+      </div>
+
+      <div class="grid-2">
+
+        <div class="card reveal">
+          <div class="card__icon">✗</div>
+          <h3>Traditional FinOps Tools</h3>
+          <p>
+            Built for end customers analyzing their own cloud spend — not for resellers managing
+            multiple customers with distinct pricing models, agreements, and margin targets.
+          </p>
+        </div>
+
+        <div class="card reveal" style="border-left: 3px solid rgba(59,148,208,0.4);">
+          <div class="card__icon">✓</div>
+          <h3>moneta for Resellers</h3>
+          <p>
+            Built from the ground up for AWS and Azure resellers, moneta combines billing,
+            pricing, and FinOps data in a single system designed for multi-customer operations.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Section: The Solution — Cloud FinOps, Powered by Billing Infrastructure
+       ============================================================ -->
+  <section class="section section--light" id="solution">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-label section-label--light">The Solution</span>
+        <h2>Cloud FinOps, Powered by Billing Infrastructure</h2>
+        <p>
+          moneta provides the billing, pricing, and margin visibility to deliver Cloud FinOps
+          across every customer account.
+        </p>
+        <p style="margin-top: 16px;">
+          By aligning billing, discount programs, and cost data in a single system, resellers
+          can move beyond one-time analysis and deliver structured, repeatable Cloud FinOps
+          services.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Section: What You Can Deliver — Services Enabled by Moneta
+       ============================================================ -->
+  <section class="section section--elevated" id="deliver">
+    <div class="container">
+
+      <div class="section-header section-header--center reveal">
+        <span class="section-label">What You Can Deliver</span>
+        <h2>What Resellers Can Deliver with moneta</h2>
+      </div>
+
+      <div class="grid-3">
+
+        <div class="card reveal">
+          <div class="card__icon">🔍</div>
+          <h3>Customer Cloud Cost Visibility</h3>
+          <p>
+            Provide customers with reporting that explains the drivers of cloud spend, how it
+            changes over time, and how costs are allocated across cost centers.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card__icon">📉</div>
+          <h3>Lower Customer Cloud Rates</h3>
+          <p>
+            Show how cloud discount programs impact spend and where savings opportunities exist
+            to improve cost efficiency.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card__icon">🏗️</div>
+          <h3>Cost-Efficient Cloud Infrastructure</h3>
+          <p>
+            Identify opportunities to improve resource utilization, reduce waste, and optimize
+            customer environments.
+          </p>
+          <p style="margin-top: 12px; font-size: 0.875rem;">
+            Cost efficiency enables more competitive pricing, supporting customer retention and
+            long-term account growth.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Section: From Tool to Service — One-Time Analysis to Managed Service
+       ============================================================ -->
+  <section class="section" id="managed-service">
+    <div class="container">
+
+      <div class="content-split">
+
+        <div class="content-split__text reveal">
+          <span class="section-label">From Tool to Service</span>
+          <h2 style="margin-top: 16px;">From One-Time Analysis to Managed Service</h2>
+          <p>
+            Without the right infrastructure, cloud cost optimization is often delivered as a
+            one-time analysis. With moneta, resellers deliver Cloud FinOps as an ongoing managed
+            service.
+          </p>
+          <p>
+            This creates a repeatable offering that strengthens customer relationships and
+            generates recurring services revenue.
+          </p>
+        </div>
+
+        <div class="content-split__visual reveal">
+          <!-- Visual: Before / After -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="padding: 20px; background: rgba(243,106,34,0.05); border: 1px solid rgba(243,106,34,0.15); border-radius: 12px;">
+              <div style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #c04444; margin-bottom: 12px;">Without moneta</div>
+              <ul style="display: flex; flex-direction: column; gap: 8px; padding: 0;">
+                <li style="font-size: 0.8125rem; color: var(--text-muted); padding-left: 14px; position: relative;">
+                  <span style="position: absolute; left: 0; color: #c04444;">✗</span>
+                  One-time analysis
+                </li>
+                <li style="font-size: 0.8125rem; color: var(--text-muted); padding-left: 14px; position: relative;">
+                  <span style="position: absolute; left: 0; color: #c04444;">✗</span>
+                  Ad hoc cost reviews
+                </li>
+                <li style="font-size: 0.8125rem; color: var(--text-muted); padding-left: 14px; position: relative;">
+                  <span style="position: absolute; left: 0; color: #c04444;">✗</span>
+                  No recurring revenue
+                </li>
+                <li style="font-size: 0.8125rem; color: var(--text-muted); padding-left: 14px; position: relative;">
+                  <span style="position: absolute; left: 0; color: #c04444;">✗</span>
+                  Weak customer ties
+                </li>
+              </ul>
+            </div>
+            <div style="padding: 20px; background: rgba(59,148,208,0.06); border: 1px solid rgba(59,148,208,0.2); border-radius: 12px;">
+              <div style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #3B94D0; margin-bottom: 12px;">With moneta</div>
+              <ul style="display: flex; flex-direction: column; gap: 8px; padding: 0;">
+                <li style="font-size: 0.8125rem; color: var(--text-secondary); padding-left: 14px; position: relative;">
+                  <span style="position: absolute; left: 0; color: #3B94D0;">✓</span>
+                  Ongoing managed service
+                </li>
+                <li style="font-size: 0.8125rem; color: var(--text-secondary); padding-left: 14px; position: relative;">
+                  <span style="position: absolute; left: 0; color: #3B94D0;">✓</span>
+                  Structured, repeatable FinOps
+                </li>
+                <li style="font-size: 0.8125rem; color: var(--text-secondary); padding-left: 14px; position: relative;">
+                  <span style="position: absolute; left: 0; color: #3B94D0;">✓</span>
+                  Recurring services revenue
+                </li>
+                <li style="font-size: 0.8125rem; color: var(--text-secondary); padding-left: 14px; position: relative;">
+                  <span style="position: absolute; left: 0; color: #3B94D0;">✓</span>
+                  Stronger customer relationships
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Section: Why Moneta for Cloud FinOps
+       ============================================================ -->
+  <section class="section section--surface" id="why">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-label">Why moneta</span>
+        <h2>Why moneta for Cloud FinOps</h2>
+      </div>
+
+      <div class="highlight-list reveal">
+        <div class="highlight-item">
+          <span class="highlight-dot"></span>
+          <p>Built for AWS and Azure resellers managing multiple customers</p>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-dot"></span>
+          <p>Combines billing, pricing, and margin data in a single system</p>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-dot"></span>
+          <p>Enables both internal operations and customer-facing services</p>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-dot"></span>
+          <p>Supports scalable delivery of FinOps across every account</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Section: Outcomes — What This Enables
+       ============================================================ -->
+  <section class="section" id="outcomes">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-label">Outcomes</span>
+        <h2>What This Enables</h2>
+      </div>
+
+      <div class="highlight-list reveal">
+        <div class="highlight-item highlight-item--orange">
+          <span class="highlight-dot" style="background: var(--color-orange);"></span>
+          <p>Deliver Cloud FinOps as a structured, repeatable service</p>
+        </div>
+        <div class="highlight-item highlight-item--orange">
+          <span class="highlight-dot" style="background: var(--color-orange);"></span>
+          <p>Increase customer retention through ongoing value delivery</p>
+        </div>
+        <div class="highlight-item highlight-item--orange">
+          <span class="highlight-dot" style="background: var(--color-orange);"></span>
+          <p>Generate new recurring services revenue</p>
+        </div>
+        <div class="highlight-item highlight-item--orange">
+          <span class="highlight-dot" style="background: var(--color-orange);"></span>
+          <p>Strengthen your position as a strategic cloud partner</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CTA Banner — Turn Cloud FinOps into a Scalable Service Offering
+       ============================================================ -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label" style="margin-bottom: 20px;">Get Started</span>
+        <h2>Turn Cloud FinOps into a Scalable Service Offering</h2>
+        <p>
+          moneta provides the infrastructure needed to deliver Cloud FinOps consistently,
+          profitably, and at scale.
+        </p>
+        <a href="#contact" class="btn btn--primary">
+          👉 Review Your Billing, Pricing, and Margins
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       Footer
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo" aria-label="Moneta home">
+            <span class="footer__logo-icon" aria-hidden="true"></span>
+            <span class="footer__logo-wordmark">moneta</span>
+          </a>
+          <p>The billing infrastructure for AWS and Azure cloud resellers.</p>
+        </div>
+        <div class="footer__col">
+          <h5>Platform</h5>
+          <ul class="footer__links">
+            <li><a href="platform.html"         class="footer__link">Platform Overview</a></li>
+            <li><a href="platform.html#pillars" class="footer__link">Core Capabilities</a></li>
+            <li><a href="platform.html#how"     class="footer__link">How It Works</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h5>Services</h5>
+          <ul class="footer__links">
+            <li><a href="finops-services.html"          class="footer__link">FinOps Services</a></li>
+            <li><a href="finops-services.html#deliver"  class="footer__link">What You Can Deliver</a></li>
+            <li><a href="finops-services.html#outcomes" class="footer__link">Outcomes</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h5>Company</h5>
+          <ul class="footer__links">
+            <li><a href="why-moneta.html"         class="footer__link">Why Moneta</a></li>
+            <li><a href="why-moneta.html#compare" class="footer__link">Comparison</a></li>
+            <li><a href="#contact"                class="footer__link">Book a Demo</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">&copy; 2026 Moneta. All rights reserved.</span>
+        <span class="footer__tagline">Built for cloud resellers. Powered by precision.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       Contact Modal — triggered by all CTA buttons
+       FORM SUBMISSION: handler not yet connected — awaiting integration decision
+       ============================================================ -->
+  <div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="contact-modal__backdrop"></div>
+    <div class="contact-modal__panel">
+      <button class="contact-modal__close" aria-label="Close dialog">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M2 2L16 16M16 2L2 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="contact-modal__body">
+        <div class="contact-modal__info">
+          <span class="section-label">Get Started</span>
+          <h2 id="modal-title">Review Your Billing, Pricing, and Margins</h2>
+          <p>Talk to the moneta team about your cloud resale operations. We'll help you identify billing gaps, missed discounts, and margin improvement opportunities across your customer accounts.</p>
+          <ul class="contact-modal__trust">
+            <li>Trusted by AWS &amp; Azure resellers</li>
+            <li>$100M+ in annual cloud spend managed</li>
+            <li>Response within 1 business day</li>
+          </ul>
+        </div>
+        <div class="contact-modal__form-panel">
+          <form class="contact-form" id="modal-demo-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="m-first-name">First Name<span class="required">*</span></label>
+                <input class="form-input" type="text" id="m-first-name" name="first_name" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="m-last-name">Last Name<span class="required">*</span></label>
+                <input class="form-input" type="text" id="m-last-name" name="last_name" required autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="m-email">Business Email<span class="required">*</span></label>
+                <input class="form-input" type="email" id="m-email" name="business_email" required autocomplete="email" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="m-phone">Phone Number<span class="required">*</span></label>
+                <input class="form-input" type="tel" id="m-phone" name="phone_number" required autocomplete="tel" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="m-company">Company Name<span class="required">*</span></label>
+                <input class="form-input" type="text" id="m-company" name="company_name" required autocomplete="organization" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="m-title">Title<span class="required">*</span></label>
+                <input class="form-input" type="text" id="m-title" name="title" required autocomplete="organization-title" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="m-message">Message<span class="required">*</span></label>
+              <textarea class="form-textarea" id="m-message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

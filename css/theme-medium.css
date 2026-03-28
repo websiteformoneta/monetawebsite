@@ -1,0 +1,935 @@
+/* ============================================================
+   MONETA CLOUD — MEDIUM THEME  ("Twilight Blueprint")
+   File: css/theme-medium.css
+   Activated via: <html data-theme="medium">
+
+   Design Logic
+   ─────────────
+   Canvas:    Medium blue-navy (#152135 → #1d2f4a). Not pitch
+              black, not pale — a disciplined dusk register.
+   Depth:     Cards use the darker brand navy (#111D2D) so they
+              "sink" below the canvas — a real z-plane inversion
+              compared to the dark theme where cards are lighter.
+   Accents:   Orange (#F36A22) and blue (#3B94D0) snap with
+              higher contrast against the medium canvas.
+   Texture:   Subtle dot-grid on body gives an "engineering
+              blueprint" feel without overpowering the content.
+   Signatures:
+     • Dot-grid body texture
+     • Blue gradient bottom rule on nav (not the base border)
+     • Persistent blue shimmer atop every card (base 18%)
+     • Rounded-square step badges (not circles)
+     • Gradient blue text on metric values
+     • Outcome cards with terminal-label "from" tags
+     • 4px left-accent border on highlight items
+     • Horizontal guide-lines in hero background
+   ============================================================ */
+
+
+/* ════════════════════════════════════════════════════════════
+   1. CSS VARIABLE OVERRIDES
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] {
+
+  /* Backgrounds — layered z-plane, true medium register */
+  --bg-base:          #1E3D5C;   /* page canvas — real medium blue slate */
+  --bg-elevated:      #254A6E;   /* elevated sections */
+  --bg-surface:       #2C5278;   /* surface sections */
+  --bg-card:          #172E47;   /* cards SINK below canvas for depth */
+  --bg-card-hover:    #132640;   /* deeper on hover */
+  --bg-light-section: #E0EEF7;   /* crisp light sections */
+
+  /* Text */
+  --text-primary:    #EEF3F8;
+  --text-secondary:  #9DC4DE;   /* brighter on medium canvas */
+  --text-muted:      #6A9BBD;   /* more legible on lighter bg */
+  --text-dark:       #111D2D;
+
+  /* Borders — more legible on medium surfaces */
+  --border-subtle:   rgba(59, 148, 208, 0.20);
+  --border-mid:      rgba(59, 148, 208, 0.34);
+  --border-active:   rgba(59, 148, 208, 0.62);
+
+  /* Shadows — deep, color-tinted, always layered */
+  --shadow-card:
+    0 1px 0   rgba(255, 255, 255, 0.06) inset,
+    0 2px 8px  rgba(7, 13, 24, 0.55),
+    0 8px 28px rgba(7, 13, 24, 0.38),
+    0 0 0 1px  rgba(59, 148, 208, 0.08);
+  --shadow-card-hover:
+    0 1px 0   rgba(255, 255, 255, 0.08) inset,
+    0 4px 20px  rgba(7, 13, 24, 0.65),
+    0 16px 52px rgba(7, 13, 24, 0.48),
+    0 0 0 1px   rgba(59, 148, 208, 0.12),
+    0 0 48px    rgba(59, 148, 208, 0.10);
+  --shadow-glow-blue:   0 0 60px rgba(59, 148, 208, 0.28);
+  --shadow-glow-orange: 0 0 60px rgba(243, 106, 34,  0.24);
+  --shadow-nav:
+    0 1px 0 rgba(255, 255, 255, 0.04),
+    0 4px 32px rgba(7, 13, 24, 0.60);
+
+  /* Border radii — refined, slightly more generous */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-xl:  32px;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   2. BODY — DOT-GRID TEXTURE + AMBIENT GRADIENT
+   ════════════════════════════════════════════════════════════ */
+
+/* Blueprint dot-grid on the canvas layer */
+[data-theme="medium"] body {
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(59, 148, 208, 0.065) 1px,
+      transparent 1px
+    );
+  background-size: 28px 28px;
+}
+
+/* Ambient overlay — richer gradients for the lighter canvas */
+[data-theme="medium"] body::after {
+  background:
+    radial-gradient(ellipse 80% 60%  at 10%  -10%, rgba(59, 148, 208, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50%  at 90%  110%, rgba(243, 106, 34,  0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 120% 80% at 50%    0%, rgba(30, 61, 92,    0.45) 0%, transparent 70%);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   2b. AURORA CANVAS — WebGL hero background
+   ════════════════════════════════════════════════════════════ */
+
+/* Mount point fills the hero absolutely behind all content */
+[data-theme="medium"] #aurora-canvas {
+  position:       absolute;
+  inset:          0;
+  z-index:        0;
+  overflow:       hidden;
+  pointer-events: none;
+}
+
+/* Switch hero to block layout — signal-strip is relative and flows
+   directly below the nav; padding-top equals only nav-height so there
+   is no gap between the nav bottom and the signal strip */
+[data-theme="medium"] .hero {
+  display:     block;
+  padding-top: var(--nav-height); /* strip flows here — no extra gap */
+}
+
+/* Add breathing room between signal strip and hero content */
+[data-theme="medium"] .hero .container {
+  padding-top: 72px;
+}
+
+/* Aurora replaces the old soft radial glow — suppress it */
+[data-theme="medium"] .hero::before {
+  display: none;
+}
+
+/* Ensure hero content and signal strip sit above the canvas */
+[data-theme="medium"] .hero .signal-strip,
+[data-theme="medium"] .hero .container {
+  position: relative;
+  z-index:  2;
+}
+
+/* Cancel the absolute-mode top offset — strip flows naturally after nav padding */
+[data-theme="medium"] .hero .signal-strip {
+  top: 0;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   3. NAVIGATION — FROSTED GLASS + GRADIENT BOTTOM RULE
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .nav {
+  background:    #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: fixed;
+}
+
+/* Gradient bottom rule replaced with a clean shadow line on white */
+[data-theme="medium"] .nav::after {
+  display: none;
+}
+
+[data-theme="medium"] .nav.scrolled {
+  background:   rgba(255, 255, 255, 0.98);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.06),
+    0 4px 24px rgba(17, 29, 45, 0.10);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Nav links — dark on white */
+[data-theme="medium"] .nav__link {
+  color: #2C5278;
+}
+[data-theme="medium"] .nav__link:hover,
+[data-theme="medium"] .nav__link.active {
+  color: #111D2D;
+}
+
+[data-theme="medium"] .nav__mobile-menu {
+  background:      rgba(255, 255, 255, 0.98);
+  border-bottom:   1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(20px);
+}
+
+/* Mobile nav links — dark on white */
+[data-theme="medium"] .nav__mobile-link {
+  color: #2C5278;
+}
+[data-theme="medium"] .nav__mobile-link:hover,
+[data-theme="medium"] .nav__mobile-link.active {
+  color: #111D2D;
+}
+
+/* Wordmark — dark on white */
+[data-theme="medium"] .nav__logo-wordmark {
+  color: #111D2D;
+}
+[data-theme="medium"] .nav__logo:hover .nav__logo-wordmark {
+  color: #2C5278;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   4. HERO — HORIZONTAL GUIDE-LINES (unique medium signature)
+   ════════════════════════════════════════════════════════════ */
+
+/* Override the base "display: none" on hero::after */
+[data-theme="medium"] .hero::after {
+  display:  block;
+  content:  '';
+  position: absolute;
+  inset:    0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent                       0px,
+    transparent                       47px,
+    rgba(59, 148, 208, 0.032)         47px,
+    rgba(59, 148, 208, 0.032)         48px
+  );
+  pointer-events: none;
+  z-index:  0;
+}
+
+/* Stronger hero bloom on medium canvas */
+[data-theme="medium"] .hero::before {
+  background: radial-gradient(
+    ellipse 70% 65% at 50% 30%,
+    rgba(59, 148, 208, 0.16) 0%, transparent 70%
+  );
+}
+
+[data-theme="medium"] .hero--platform::before {
+  background: radial-gradient(
+    ellipse 70% 65% at 55% 30%,
+    rgba(59, 148, 208, 0.16) 0%, transparent 70%
+  );
+}
+[data-theme="medium"] .hero--finops::before {
+  background: radial-gradient(
+    ellipse 70% 65% at 45% 30%,
+    rgba(243, 106, 34, 0.14) 0%, transparent 70%
+  );
+}
+[data-theme="medium"] .hero--why::before {
+  background: radial-gradient(
+    ellipse 70% 65% at 50% 30%,
+    rgba(59, 148, 208, 0.15) 0%, transparent 70%
+  );
+}
+
+/* Platform credibility dot — brighter on medium */
+[data-theme="medium"] .hero__platform-dot {
+  box-shadow: 0 0 10px rgba(59, 148, 208, 0.9), 0 0 20px rgba(59, 148, 208, 0.4);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   5. SECTION LABELS — DATA-CHIP AESTHETIC
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .section-label {
+  background:     rgba(59, 148, 208, 0.13);
+  border-color:   rgba(59, 148, 208, 0.35);
+  letter-spacing: 0.14em;
+  font-size:      0.70rem;
+}
+
+[data-theme="medium"] .section-label--orange {
+  background:   rgba(243, 106, 34, 0.10);
+  border-color: rgba(243, 106, 34, 0.32);
+}
+
+[data-theme="medium"] .section-label--light {
+  background:   rgba(59, 148, 208, 0.13);
+  border-color: rgba(59, 148, 208, 0.35);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   6. CARDS — DARK NAVY "SUNK" INTO MEDIUM CANVAS
+   ════════════════════════════════════════════════════════════ */
+
+/* Top shimmer — blue, always-visible at 18%, brightens on hover */
+[data-theme="medium"] .card::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 148, 208, 0.60),
+    transparent
+  );
+  opacity: 0.18;
+  transition: opacity var(--transition-mid);
+}
+
+[data-theme="medium"] .card:hover {
+  background: var(--bg-card-hover);
+}
+
+[data-theme="medium"] .card:hover::before {
+  opacity: 1;
+}
+
+/* Card icon glow is stronger since medium bg allows it */
+[data-theme="medium"] .card:hover .card__icon {
+  background:   rgba(243, 106, 34, 0.16);
+  border-color: rgba(243, 106, 34, 0.38);
+  box-shadow:   0 0 20px rgba(243, 106, 34, 0.24);
+}
+
+/* Light-section cards — crisp white on the saturated light bg */
+[data-theme="medium"] .section--light .card {
+  background:   rgba(255, 255, 255, 0.94);
+  border-color: rgba(17, 29, 45, 0.07);
+  box-shadow:
+    0 1px 0   rgba(255, 255, 255, 0.92) inset,
+    0 4px 20px rgba(17, 29, 45, 0.09);
+}
+
+[data-theme="medium"] .section--light .card:hover {
+  box-shadow:
+    0 1px 0   rgba(255, 255, 255, 1) inset,
+    0 8px 32px rgba(17, 29, 45, 0.14),
+    0 0 0 1px  rgba(59, 148, 208, 0.24);
+  border-color: rgba(59, 148, 208, 0.28);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   7. STEP BADGES — ROUNDED SQUARES (vs. circles in dark theme)
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .step__number {
+  border-radius:  var(--radius-md);          /* rounded square */
+  background:     rgba(59, 148, 208, 0.13);
+  border-color:   rgba(59, 148, 208, 0.44);
+  box-shadow:
+    0 0 0  4px rgba(59, 148, 208, 0.08),
+    0 0 24px   rgba(59, 148, 208, 0.22);
+}
+
+/* Step connector line — more opaque on medium */
+[data-theme="medium"] .steps::before {
+  background: linear-gradient(
+    90deg,
+    rgba(59, 148, 208, 0.80) 0%,
+    rgba(59, 148, 208, 0.35) 55%,
+    transparent 100%
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   8. OUTCOME CARDS — TERMINAL-LABEL "FROM" TAGS
+   ════════════════════════════════════════════════════════════ */
+
+/* Re-style the "From [X]" label as a compact terminal tag */
+[data-theme="medium"] .outcome-arrow {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             6px;
+  width:           fit-content;
+  padding:         3px 10px;
+  background:      rgba(0, 0, 0, 0.28);
+  border:          1px solid rgba(255, 255, 255, 0.07);
+  border-radius:   4px;
+  font-size:       0.68rem;
+  letter-spacing:  0.10em;
+  color:           var(--text-muted);
+  margin-bottom:   var(--space-sm);
+  /* reset the arrow pseudo from the base */
+  font-weight:     600;
+}
+
+/* Replace "→" with "↗" in a different colour */
+[data-theme="medium"] .outcome-arrow::after {
+  content:  '↗';
+  color:    var(--color-orange);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Gradient bar — ghost at rest, animates on hover via opacity */
+[data-theme="medium"] .outcome-card::after {
+  height:     2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-blue),
+    var(--color-orange),
+    var(--color-blue)
+  );
+  opacity:    0.22;
+  transform:  scaleX(1);
+  transition:
+    opacity var(--transition-slow),
+    transform var(--transition-slow);
+}
+
+[data-theme="medium"] .outcome-card:hover::after {
+  opacity:   0.95;
+  transform: scaleX(1);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   9. METRICS STRIP — GRADIENT TEXT ON VALUES
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .metrics-strip {
+  background:   var(--bg-elevated);
+  border-color: var(--border-subtle);
+}
+
+/* Gradient text — the most visually distinctive metric change */
+[data-theme="medium"] .metric-value {
+  background:              linear-gradient(135deg, #72c3f5 0%, var(--color-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip:         text;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   10. HIGHLIGHT ITEMS — 4 PX LEFT ACCENT BORDER
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .highlight-item {
+  background:          rgba(59, 148, 208, 0.07);
+  border-color:        var(--border-subtle);
+  border-left-width:   4px;
+  border-left-color:   var(--color-blue);
+}
+
+[data-theme="medium"] .highlight-item:hover {
+  background:          rgba(59, 148, 208, 0.13);
+  border-left-color:   var(--color-blue);
+}
+
+[data-theme="medium"] .highlight-item--orange {
+  background:        rgba(243, 106, 34, 0.07);
+  border-color:      rgba(243, 106, 34, 0.15);
+  border-left-color: var(--color-orange);
+}
+
+[data-theme="medium"] .highlight-item--orange:hover {
+  background:        rgba(243, 106, 34, 0.13);
+  border-left-color: var(--color-orange);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   11. PROBLEM ITEMS
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .problem-item {
+  background:   rgba(243, 106, 34, 0.07);
+  border-color: rgba(243, 106, 34, 0.20);
+}
+
+[data-theme="medium"] .problem-item:hover {
+  border-color: rgba(243, 106, 34, 0.36);
+  background:   rgba(243, 106, 34, 0.11);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   12. SECTION BACKGROUNDS
+   ════════════════════════════════════════════════════════════ */
+
+/* section--light uses the medium theme's more saturated light tone */
+/* Tighter section vertical rhythm for medium theme */
+[data-theme="medium"] .section {
+  padding: 72px 0;
+}
+[data-theme="medium"] .section--sm {
+  padding: var(--space-xl) 0;
+}
+
+/* Reduce internal section-header bottom gap (base = 96px → 40px) */
+[data-theme="medium"] .section-header {
+  margin-bottom: var(--space-xl);
+}
+
+/* Reduce closing italic statement top margin (base = 96px → 40px) */
+[data-theme="medium"] .closing-line {
+  margin-top: var(--space-xl);
+}
+
+/* Tighten hero platform badge bottom margin */
+[data-theme="medium"] .hero__platform {
+  margin-bottom: var(--space-md);
+}
+
+/* Tighten metrics inner gap (base = 128px → 64px) */
+[data-theme="medium"] .metrics-inner {
+  gap: var(--space-2xl);
+}
+
+[data-theme="medium"] .section--light {
+  background: var(--bg-light-section);
+}
+
+/* Section divider — more visible */
+[data-theme="medium"] .section-divider {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-mid),
+    transparent
+  );
+  height: 1px;
+}
+
+/* Tint section */
+[data-theme="medium"] .section--tint {
+  background: linear-gradient(
+    180deg,
+    rgba(59, 148, 208, 0.055) 0%,
+    transparent 100%
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   13. CONTENT PANEL
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .content-panel::before {
+  background: radial-gradient(
+    circle,
+    rgba(59, 148, 208, 0.12) 0%, transparent 70%
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   14. CTA BANNER
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .cta-banner {
+  background:   linear-gradient(135deg, #1d2f4a 0%, #152135 100%);
+  border-color: var(--border-subtle);
+}
+
+[data-theme="medium"] .cta-banner::before {
+  background: radial-gradient(
+    ellipse 70% 80% at 50% 50%,
+    rgba(59, 148, 208, 0.09) 0%, transparent 70%
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   15. CONTACT FORM + SECTION
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .contact-form-section {
+  background: var(--bg-base);
+}
+
+[data-theme="medium"] .contact-form {
+  background:   var(--bg-card);
+  border-color: var(--border-mid);
+}
+
+[data-theme="medium"] .form-input,
+[data-theme="medium"] .form-textarea {
+  background:   var(--bg-base);
+  border-color: var(--border-subtle);
+  color:        var(--text-primary);
+}
+
+[data-theme="medium"] .form-input:hover,
+[data-theme="medium"] .form-textarea:hover {
+  border-color: var(--border-mid);
+}
+
+[data-theme="medium"] .form-input:focus,
+[data-theme="medium"] .form-textarea:focus {
+  border-color: var(--color-blue);
+  background:   rgba(59, 148, 208, 0.04);
+  box-shadow:   0 0 0 3px rgba(59, 148, 208, 0.16);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   16. COMPARISON TABLE
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .comparison-table {
+  background: var(--bg-card);
+}
+
+[data-theme="medium"] .comparison-table th {
+  background:           var(--bg-base);
+  border-bottom-color:  var(--border-mid);
+}
+
+[data-theme="medium"] .comparison-table th.col-moneta {
+  background:         rgba(59, 148, 208, 0.11);
+  border-left-color:  var(--border-active);
+  border-right-color: var(--border-active);
+}
+
+[data-theme="medium"] .comparison-table td.col-moneta {
+  background:         rgba(59, 148, 208, 0.08);
+  border-left-color:  rgba(59, 148, 208, 0.18);
+  border-right-color: rgba(59, 148, 208, 0.18);
+}
+
+[data-theme="medium"] .comparison-table tr:hover td {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+[data-theme="medium"] .comparison-table tr:hover td.col-moneta {
+  background: rgba(59, 148, 208, 0.12);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   17. FOOTER
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .footer {
+  background:   #ffffff;
+  border-color: rgba(0, 0, 0, 0.10);
+}
+
+/* Footer text — dark on white */
+[data-theme="medium"] .footer__brand p {
+  color: #4A6A88;
+}
+[data-theme="medium"] .footer__logo-wordmark {
+  color: #111D2D;
+}
+[data-theme="medium"] .footer__col h5 {
+  color: #111D2D;
+}
+[data-theme="medium"] .footer__link {
+  color: #2C5278;
+}
+[data-theme="medium"] .footer__link:hover {
+  color: #111D2D;
+}
+[data-theme="medium"] .footer__copy,
+[data-theme="medium"] .footer__tagline {
+  color: #4A6A88;
+}
+[data-theme="medium"] .footer__bottom {
+  border-top-color: rgba(0, 0, 0, 0.10);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   18. CONTACT MODAL
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .contact-modal__backdrop {
+  background: rgba(7, 12, 22, 0.88);
+}
+
+[data-theme="medium"] .contact-modal__panel {
+  background:   var(--bg-elevated);
+  border-color: var(--border-mid);
+  overflow-y:   hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 32px 100px rgba(7, 12, 22, 0.74),
+    0 0 100px    rgba(59, 148, 208, 0.12);
+}
+
+[data-theme="medium"] .contact-modal__info {
+  padding-top:        var(--space-lg);
+  border-right-color: var(--border-subtle);
+  background: linear-gradient(
+    160deg,
+    rgba(59, 148, 208, 0.10) 0%, transparent 55%
+  );
+}
+
+[data-theme="medium"] .contact-modal__form-panel {
+  padding-top: var(--space-lg);
+}
+
+[data-theme="medium"] .contact-modal__close {
+  top:          10px;
+  right:        10px;
+  background:   rgba(255, 255, 255, 0.06);
+  border-color: var(--border-subtle);
+}
+[data-theme="medium"] .contact-modal__close:hover {
+  background:   rgba(255, 255, 255, 0.12);
+  border-color: var(--border-mid);
+}
+
+/* Modal form panel — override the dark card bg that .contact-form inherits */
+[data-theme="medium"] .contact-modal__form-panel .contact-form {
+  background: transparent;
+}
+
+/* Form inputs inside modal */
+[data-theme="medium"] .contact-modal__form-panel .form-input,
+[data-theme="medium"] .contact-modal__form-panel .form-textarea {
+  background:   rgba(255, 255, 255, 0.07);
+  border-color: var(--border-mid);
+}
+
+[data-theme="medium"] .contact-modal__form-panel .form-input:hover,
+[data-theme="medium"] .contact-modal__form-panel .form-textarea:hover {
+  background:   rgba(255, 255, 255, 0.10);
+  border-color: var(--border-active);
+}
+
+[data-theme="medium"] .contact-modal__form-panel .form-input:focus,
+[data-theme="medium"] .contact-modal__form-panel .form-textarea:focus {
+  background:   rgba(255, 255, 255, 0.10);
+  border-color: var(--color-blue);
+  box-shadow:   0 0 0 3px rgba(59, 148, 208, 0.18);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   19. CLOSING LINE
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="medium"] .closing-line::before {
+  background: var(--border-mid);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   20. BUTTONS — subtle shift for medium canvas
+   ════════════════════════════════════════════════════════════ */
+
+/* Secondary button — border is more visible on medium bg */
+[data-theme="medium"] .btn--secondary {
+  border-color: var(--border-active);
+  color:        var(--color-blue);
+}
+
+[data-theme="medium"] .btn--secondary:hover {
+  background:   rgba(59, 148, 208, 0.10);
+  border-color: var(--color-blue);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   21. SIGNAL STRIP — SCROLLING TICKER INSIDE HERO
+   ════════════════════════════════════════════════════════════ */
+
+/* Absolutely positioned inside .hero — sits immediately below the nav */
+[data-theme="medium"] .signal-strip {
+  position:      absolute;
+  top:           var(--nav-height, 72px);
+  left:          0;
+  right:         0;
+  height:        40px;
+  overflow:      hidden;
+  z-index:       2;
+  display:       flex;
+  align-items:   center;
+  background:    #3A6A96;
+  border-top:    1px solid rgba(59, 148, 208, 0.20);
+  border-bottom: 1px solid rgba(59, 148, 208, 0.28);
+}
+
+/* Fade masks — left and right edge dissolve */
+[data-theme="medium"] .signal-strip::before,
+[data-theme="medium"] .signal-strip::after {
+  content:         '';
+  position:        absolute;
+  top:             0;
+  bottom:          0;
+  width:           120px;
+  z-index:         3;
+  pointer-events:  none;
+}
+
+[data-theme="medium"] .signal-strip::before {
+  left:       0;
+  background: linear-gradient(90deg, rgba(58, 106, 150, 1) 0%, transparent 100%);
+}
+
+[data-theme="medium"] .signal-strip::after {
+  right:      0;
+  background: linear-gradient(-90deg, rgba(58, 106, 150, 1) 0%, transparent 100%);
+}
+
+/* Scrolling track — duplicated content for seamless loop */
+[data-theme="medium"] .signal-strip__track {
+  display:      flex;
+  align-items:  center;
+  white-space:  nowrap;
+  will-change:  transform;
+  animation:    medium-ticker 65s linear infinite;
+}
+
+[data-theme="medium"] .signal-strip__track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes medium-ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+[data-theme="medium"] .signal-strip__item {
+  display:         inline-block;
+  padding:         0 28px;
+  font-size:       0.67rem;
+  font-weight:     600;
+  letter-spacing:  0.13em;
+  text-transform:  uppercase;
+  color:           rgba(157, 196, 222, 0.80);
+  transition:      color var(--transition-fast);
+}
+
+[data-theme="medium"] .signal-strip__sep {
+  display:    inline-block;
+  color:      var(--color-orange);
+  font-size:  0.42rem;
+  opacity:    0.65;
+  flex-shrink: 0;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   22. TRANSFORM PANEL — BEFORE / AFTER DATA GRID
+   ════════════════════════════════════════════════════════════ */
+
+/* Container section */
+[data-theme="medium"] .transform-panel {
+  padding: var(--space-lg) 0 var(--space-xl);
+  margin-top: var(--space-lg);
+}
+
+/* Outer grid wrapper — blueprint hairline grid */
+[data-theme="medium"] .transform-panel__grid {
+  display:          grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:              1px;
+  background:       rgba(59, 148, 208, 0.18);   /* gap colour = hairline grid lines */
+  border:           1px solid rgba(59, 148, 208, 0.22);
+  border-radius:    var(--radius-lg);
+  overflow:         hidden;
+}
+
+/* Each before→after pair cell */
+[data-theme="medium"] .transform-pair {
+  display:      grid;
+  grid-template-columns: 1fr 28px 1fr;
+  align-items:  center;
+  gap:          12px;
+  padding:      22px 24px;
+  background:   var(--bg-card);
+  transition:   background var(--transition-fast);
+}
+
+[data-theme="medium"] .transform-pair:hover {
+  background: var(--bg-card-hover);
+}
+
+/* Before / After text columns */
+[data-theme="medium"] .transform-pair__before,
+[data-theme="medium"] .transform-pair__after {
+  display:        flex;
+  flex-direction: column;
+  gap:            5px;
+}
+
+/* "BEFORE" / "AFTER" micro-labels */
+[data-theme="medium"] .transform-pair__label {
+  font-size:       0.60rem;
+  font-weight:     700;
+  letter-spacing:  0.14em;
+  text-transform:  uppercase;
+}
+
+[data-theme="medium"] .transform-pair__before .transform-pair__label {
+  color: rgba(243, 106, 34, 0.65);
+}
+
+[data-theme="medium"] .transform-pair__after .transform-pair__label {
+  color: rgba(59, 148, 208, 0.80);
+}
+
+/* Text values */
+[data-theme="medium"] .transform-pair__text {
+  font-size:   0.90rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+[data-theme="medium"] .transform-pair__before .transform-pair__text {
+  color:                    var(--text-secondary);
+  text-decoration:          line-through;
+  text-decoration-color:    rgba(243, 106, 34, 0.38);
+  text-decoration-thickness: 1px;
+  opacity:                  0.75;
+}
+
+[data-theme="medium"] .transform-pair__after .transform-pair__text {
+  color: var(--text-primary);
+}
+
+/* Arrow connector between before and after */
+[data-theme="medium"] .transform-pair__arrow {
+  text-align:  center;
+  font-size:   1.0rem;
+  color:       rgba(243, 106, 34, 0.50);
+  font-weight: 300;
+  transition:  color var(--transition-fast), opacity var(--transition-fast);
+  user-select: none;
+}
+
+[data-theme="medium"] .transform-pair:hover .transform-pair__arrow {
+  color:   var(--color-blue);
+  opacity: 1;
+}
+
+/* Responsive — stack to 1 column on mobile */
+@media (max-width: 768px) {
+  [data-theme="medium"] .transform-panel__grid {
+    grid-template-columns: 1fr;
+  }
+
+  [data-theme="medium"] .transform-pair {
+    grid-template-columns: 1fr 22px 1fr;
+    padding: 16px 16px;
+  }
+
+  [data-theme="medium"] .signal-strip {
+    display: none; /* too narrow for ticker on mobile */
+  }
+}
